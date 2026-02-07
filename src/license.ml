@@ -65,7 +65,7 @@ let filename_of_license license : string =
     | MIT           -> "mit"
     | MOZILLA       -> "mozilla"
   in
-    let filepath = "./_licenses/" ^ slug ^ ".md"
+    let filepath = "./_licenses/" ^ slug ^ ".txt"
     in filepath
 
 let title_of_license = function
