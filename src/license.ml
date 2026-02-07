@@ -5,6 +5,7 @@
 *)
 
 open File
+open Io_msg
 
 type license =
   | APACHE_2
@@ -17,6 +18,11 @@ type license =
   | GNU_LGPL_3
   | MIT
   | MOZILLA
+
+let all_licenses = [
+  APACHE_2; ARTISTIC_2; BSD_3_Clause; CC_BY_4; EUPL_1_2;
+  GNU_AGPL_3; GNU_GPL_2; GNU_LGPL_3; MIT; MOZILLA
+]
 
 let license_of_string str : license option =
   match str with
@@ -31,6 +37,19 @@ let license_of_string str : license option =
   | "mit" -> Some (MIT)
   | "mozilla" -> Some (MOZILLA)
   | _ -> None
+
+let cmd_of_license l : string =
+  match l with
+  | APACHE_2 -> "apache"
+  | ARTISTIC_2 -> "artistic"
+  | BSD_3_Clause -> "bsd"
+  | CC_BY_4 -> "cc"
+  | EUPL_1_2 -> "eupl"
+  | GNU_AGPL_3 -> "agpl"
+  | GNU_GPL_2 -> "gpl"
+  | GNU_LGPL_3 -> "lgpl"
+  | MIT -> "mit"
+  | MOZILLA -> "mozilla"
 
 let filename_of_license license : string =
   let slug =
@@ -65,10 +84,11 @@ let create_license_file str =
   let out_filepath = "./LICENSE" in
   match license_of_string str with
     | Some valid ->
-        let license_path = (filename_of_license valid) in
+        let license_path = filename_of_license valid in
         Printf.printf "Creating '%s'...\n" (title_of_license valid);
         write_to_file (read_file license_path) out_filepath ;
         exit 0
     | None ->
-        Printf.eprintf "The provided string doesn't match any supported license.\n";
+        Printf.printf "The provided string doesn't match any supported license.\n";
+        print_use_help ();
         exit 1;
