@@ -4,8 +4,9 @@
   File: src/io_msg.ml
 *)
 
+let version = "0.0.1"
+
 let print_version () =
-  let version = "0.0.1" in
   let title = "Licenzio" in
   let description = "A CLI tool for adding license files to projects" in
   let repo_url = "github.com/khalidbelk/licenzio"
