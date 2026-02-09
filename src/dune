@@ -1,4 +1,17 @@
 (executable
  (public_name licenzio)
  (name main)
+ (preprocess (pps ppx_blob))
+ (preprocessor_deps
+   (file ../licenses/apache_2.0.txt)
+   (file ../licenses/artistic_2.0.txt)
+   (file ../licenses/bsd_3_clause.txt)
+   (file ../licenses/cc_attrib_4.txt)
+   (file ../licenses/eupl_1.2.txt)
+   (file ../licenses/gnu_agpl-v3.txt)
+   (file ../licenses/gnu_gpl-v3.txt)
+   (file ../licenses/gnu_lgpl-v3.txt)
+   (file ../licenses/mit.txt)
+   (file ../licenses/mozilla.txt)
+  )
 )

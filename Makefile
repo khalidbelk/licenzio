@@ -14,10 +14,17 @@ all: $(NAME)
 opam:
 	dune build licenzio.opam
 
+install: opam-deps
+
+opam-deps:
+	@echo "${GREEN}Installing dependencies...${RESET}"
+	opam install . --deps-only --with-test || true
+
 $(NAME):
 	@echo "${GREEN}Building${RESET} $(NAME)..."
-	@dune build src/main.exe
+	@dune build --profile=release src/main.exe
 	@install -m 755 _build/default/src/main.exe $(NAME)
+	@strip $(NAME)
 	@echo "${GREEN}✔ Done.${RESET}"
 
 watch:

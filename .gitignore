@@ -6,3 +6,5 @@ licenzio
 
 # MacOS file
 .DS_Store
+
+.vscode/
