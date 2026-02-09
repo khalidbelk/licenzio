@@ -1,0 +1,69 @@
+name: Build and Release Binaries
+on:
+  push:
+    tags: ['v*']
+
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Restore opam cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.opam
+        key: ${{ runner.os }}-opam-5.2-${{ hashFiles('**/*.opam') }}
+        restore-keys: |
+          ${{ runner.os }}-opam-5.2-
+          ${{ runner.os }}-opam-
+
+    - uses: ocaml/setup-ocaml@v3
+      with:
+        ocaml-compiler: 5.2
+
+    - name: Install dune
+      run: opam install dune
+
+    - name: Build release binary
+      run: |
+        eval $(opam env)
+        dune build --release
+      env:
+        OCAMLPARAM: ${{ runner.os == 'Linux' && '_,cclib=-static' || '' }}
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: licenzio-${{ matrix.os }}
+        path: _build/default/src/main.exe
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/download-artifact@v4
+      with:
+        path: binaries/
+
+    - name: Prepare release binaries
+      run: |
+        mkdir -p release
+        mv binaries/licenzio-ubuntu-latest/main.exe release/licenzio-linux
+        mv binaries/licenzio-macos-latest/main.exe release/licenzio-macos
+
+    - uses: softprops/action-gh-release@v2
+      with:
+        files: release/*
+        generate_release_notes: true
+        token: ${{ secrets.RELEASES_PAT_TOKEN }}
