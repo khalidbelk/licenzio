@@ -13,11 +13,21 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Restore opam cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.opam
+        key: ${{ runner.os }}-opam-5.2-${{ hashFiles('**/*.opam') }}
+        restore-keys: |
+          ${{ runner.os }}-opam-5.2-
+          ${{ runner.os }}-opam-
+
     - uses: ocaml/setup-ocaml@v3
       with:
         ocaml-compiler: 5.2
 
-    - run: opam install . --deps-only --with-test --locked
+    - name: Install dune
+      run: opam install dune
 
     - run: dune build --release
       env:
