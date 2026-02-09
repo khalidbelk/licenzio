@@ -56,10 +56,14 @@ jobs:
       with:
         path: binaries/
 
+    - name: Prepare release binaries
+      run: |
+        mkdir -p release
+        mv binaries/licenzio-ubuntu-latest/main.exe release/licenzio-linux
+        mv binaries/licenzio-macos-latest/main.exe release/licenzio-macos
+
     - uses: softprops/action-gh-release@v2
       with:
-        files: |
-          binaries/licenzio-ubuntu-latest/licenzio-linux.exe
-          binaries/licenzio-macos-latest/licenzio-macos.exe
+        files: release/*
         generate_release_notes: true
         token: ${{ secrets.RELEASES_PAT_TOKEN }}
