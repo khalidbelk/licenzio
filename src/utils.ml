@@ -15,7 +15,8 @@ let formatted_flags_list =
     in
     "\t" ^ formatted_cmd ^ " : " ^ L.title_of_license elem ^ "\n"
   in
-    let formatted = L.all_licenses |> List.map format
+    let license_names = List.map fst L.all_licenses in
+    let formatted = license_names |> List.map format
     in formatted
 
 let help =
