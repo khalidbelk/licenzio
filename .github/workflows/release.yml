@@ -29,7 +29,10 @@ jobs:
     - name: Install dune
       run: opam install dune
 
-    - run: dune build --release
+    - name: Build release binary
+      run: |
+        eval $(opam env)
+        dune build --release
       env:
         OCAMLPARAM: '_,cclib=-static'
 
