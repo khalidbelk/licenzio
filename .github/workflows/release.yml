@@ -13,9 +13,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - uses: ocaml/setup-ocaml@v2
+    - uses: ocaml/setup-ocaml@v3
       with:
-        ocaml-version: 5.2.0
+        ocaml-compiler: 5.2
 
     - run: opam install . --deps-only --with-test --locked
 
