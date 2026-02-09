@@ -23,5 +23,6 @@ let help =
   ^ "license_name :" ^ "\n\n"
   ^ (String.concat "" formatted_flags_list) ^ "\n"
   ^ "OPTIONS: " ^ "\n"
-  ^ "\t" ^ "-h, --help     Show this help" ^ "\n"
+  ^ "\t" ^ "-o             Output directory / path" ^ "\n\n"
+  ^ "\t" ^ "-h, --help     Show this help message" ^ "\n"
   ^ "\t" ^ "-v, --version  Show version info" ^ "\n"
