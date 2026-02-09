@@ -80,8 +80,9 @@ let title_of_license = function
   | MIT           -> "MIT License"
   | MOZILLA       -> "Mozilla Public License 2.0"
 
-let create_license_file str =
-  let out_filepath = "./LICENSE" in
+let create_license_file ?(out_dir="./") str =
+  let out_filename = "LICENSE" in
+  let out_filepath = Filename.concat out_dir out_filename in
   match license_of_string str with
     | Some valid ->
         let license_path = filename_of_license valid in

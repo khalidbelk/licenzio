@@ -21,6 +21,8 @@ let handle_args args =
       print_endline U.help; exit 0
   | [_; license] ->
     create_license_file license
+  | [_; license; "-o"; out_dir] ->
+    create_license_file ~out_dir:out_dir license
   | _ ->
     print_string "Wrong arguments. "; print_use_help ();
     exit 1
