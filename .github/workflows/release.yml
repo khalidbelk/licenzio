@@ -62,3 +62,4 @@ jobs:
           binaries/licenzio-ubuntu-latest/**/*
           binaries/licenzio-macos-latest/**/*
         generate_release_notes: true
+        token: ${{ secrets.RELEASES_PAT_TOKEN }}
