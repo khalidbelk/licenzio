@@ -1,0 +1,47 @@
+name: Build and Release Binaries
+on:
+  push:
+    tags: ['v*']
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: ocaml/setup-ocaml@v2
+      with:
+        ocaml-version: 5.2.0
+
+    - run: opam install . --deps-only --with-test --locked
+
+    - run: dune build --release
+      env:
+        OCAMLPARAM: '_,cclib=-static'
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: licenzio-${{ matrix.os }}
+        path: _build/default/src/main.exe
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/download-artifact@v4
+      with:
+        path: binaries/
+
+    - uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          binaries/licenzio-ubuntu-latest/**/*
+          binaries/licenzio-macos-latest/**/*
+          binaries/licenzio-windows-latest/**/*
+        generate_release_notes: true
