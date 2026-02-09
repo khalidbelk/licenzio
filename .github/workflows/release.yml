@@ -61,7 +61,6 @@ jobs:
         mkdir -p release
         mv binaries/licenzio-ubuntu-latest/main.exe release/licenzio-linux
         mv binaries/licenzio-macos-latest/main.exe release/licenzio-macos
-        chmod +x release/*
 
     - uses: softprops/action-gh-release@v2
       with:
