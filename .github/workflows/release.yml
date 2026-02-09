@@ -59,7 +59,7 @@ jobs:
     - uses: softprops/action-gh-release@v2
       with:
         files: |
-          binaries/licenzio-ubuntu-latest/**/*
-          binaries/licenzio-macos-latest/**/*
+          binaries/licenzio-ubuntu-latest/licenzio-linux.exe
+          binaries/licenzio-macos-latest/licenzio-macos.exe
         generate_release_notes: true
         token: ${{ secrets.RELEASES_PAT_TOKEN }}
