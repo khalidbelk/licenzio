@@ -34,6 +34,11 @@ jobs:
     - name: Install dune
       run: opam install dune
 
+    - name: Install dependencies
+      run: |
+        eval $(opam env)
+        opam install . --deps-only -y
+
     - name: Build release binary
       run: |
         eval $(opam env)
