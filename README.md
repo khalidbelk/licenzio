@@ -55,8 +55,8 @@ This will produce the `licenzio` executable.
 
 Add a license to your project:
 ```bash
-licenzio mit          # Adds MIT license
-licenzio apache       # Adds Apache 2.0 license
+licenzio mit                               # Adds MIT license
+licenzio apache                            # Adds Apache 2.0 license
 licenzio lgpl -o ~/Desktop/my_old_project/ # Adds LGPL v3 license to the specified directory
 ```
 
