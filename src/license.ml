@@ -20,16 +20,16 @@ type license =
   | MOZILLA
 
 let all_licenses = [
-  (APACHE_2, [%blob "../licenses/apache_2.0.txt"]);
-  (ARTISTIC_2, [%blob "../licenses/artistic_2.0.txt"]);
-  (BSD_3_Clause, [%blob "../licenses/bsd_3_clause.txt"]);
-  (CC_BY_4, [%blob "../licenses/cc_attrib_4.txt"]);
-  (EUPL_1_2, [%blob "../licenses/eupl_1.2.txt"]);
-  (GNU_AGPL_3, [%blob "../licenses/gnu_agpl-v3.txt"]);
-  (GNU_GPL_2, [%blob "../licenses/gnu_gpl-v3.txt"]);
-  (GNU_LGPL_3, [%blob "../licenses/gnu_lgpl-v3.txt"]);
-  (MIT, [%blob "../licenses/mit.txt"]);
-  (MOZILLA, [%blob "../licenses/mozilla.txt"])
+  (APACHE_2,      [%blob "../licenses/apache_2.0.txt"]);
+  (ARTISTIC_2,    [%blob "../licenses/artistic_2.0.txt"]);
+  (BSD_3_Clause,  [%blob "../licenses/bsd_3_clause.txt"]);
+  (CC_BY_4,       [%blob "../licenses/cc_attrib_4.txt"]);
+  (EUPL_1_2,      [%blob "../licenses/eupl_1.2.txt"]);
+  (GNU_AGPL_3,    [%blob "../licenses/gnu_agpl-v3.txt"]);
+  (GNU_GPL_2,     [%blob "../licenses/gnu_gpl-v3.txt"]);
+  (GNU_LGPL_3,    [%blob "../licenses/gnu_lgpl-v3.txt"]);
+  (MIT,           [%blob "../licenses/mit.txt"]);
+  (MOZILLA,       [%blob "../licenses/mozilla.txt"])
 ]
 
 let license_of_string str : license option =
@@ -58,23 +58,6 @@ let cmd_of_license l : string =
   | GNU_LGPL_3 -> "lgpl"
   | MIT -> "mit"
   | MOZILLA -> "mozilla"
-
-let filename_of_license license : string =
-  let slug =
-    match license with
-    | APACHE_2      -> "apache_2.0"
-    | ARTISTIC_2    -> "artistic_2.0"
-    | BSD_3_Clause  -> "bsd_3_clause"
-    | CC_BY_4       -> "cc_attrib_4"
-    | EUPL_1_2      -> "eupl_1.2"
-    | GNU_AGPL_3    -> "gnu_agpl-v3"
-    | GNU_GPL_2     -> "gnu_gpl-v3"
-    | GNU_LGPL_3    -> "gnu_lgpl-v3"
-    | MIT           -> "mit"
-    | MOZILLA       -> "mozilla"
-  in
-    let filepath = "./_licenses/" ^ slug ^ ".txt"
-    in filepath
 
 let title_of_license = function
   | APACHE_2      -> "Apache License (Version 2.0)"
