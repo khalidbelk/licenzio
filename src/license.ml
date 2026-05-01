@@ -10,6 +10,7 @@ open Io_msg
 type license =
   | APACHE_2
   | ARTISTIC_2
+  | BSD_2_Clause
   | BSD_3_Clause
   | CC_BY_4
   | EUPL_1_2
@@ -23,6 +24,7 @@ type license =
 let all_licenses = [
   (APACHE_2,      [%blob "../licenses/apache_2.0.txt"]);
   (ARTISTIC_2,    [%blob "../licenses/artistic_2.0.txt"]);
+  (BSD_2_Clause,  [%blob "../licenses/bsd_2_clause.txt"]);
   (BSD_3_Clause,  [%blob "../licenses/bsd_3_clause.txt"]);
   (CC_BY_4,       [%blob "../licenses/cc_attrib_4.txt"]);
   (EUPL_1_2,      [%blob "../licenses/eupl_1.2.txt"]);
@@ -38,7 +40,8 @@ let license_of_string str : license option =
   match str with
   | "apache" -> Some (APACHE_2)
   | "artistic" -> Some (ARTISTIC_2)
-  | "bsd" -> Some (BSD_3_Clause)
+  | "bsd2" -> Some (BSD_2_Clause)
+  | "bsd3" -> Some (BSD_3_Clause)
   | "cc" -> Some (CC_BY_4)
   | "eupl" -> Some (EUPL_1_2)
   | "agpl" -> Some (GNU_AGPL_3)
@@ -53,7 +56,8 @@ let cmd_of_license l : string =
   match l with
   | APACHE_2 -> "apache"
   | ARTISTIC_2 -> "artistic"
-  | BSD_3_Clause -> "bsd"
+  | BSD_2_Clause -> "bsd2"
+  | BSD_3_Clause -> "bsd3"
   | CC_BY_4 -> "cc"
   | EUPL_1_2 -> "eupl"
   | GNU_AGPL_3 -> "agpl"
@@ -66,6 +70,7 @@ let cmd_of_license l : string =
 let title_of_license = function
   | APACHE_2      -> "Apache License (Version 2.0)"
   | ARTISTIC_2    -> "The Artistic License 2.0"
+  | BSD_2_Clause  -> "BSD 2-Clause License"
   | BSD_3_Clause  -> "BSD 3-Clause License"
   | CC_BY_4       -> "Creative Commons - Attribution 4.0 International"
   | EUPL_1_2      -> "European Union Public License 1.2"
