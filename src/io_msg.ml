@@ -4,7 +4,7 @@
   File: src/io_msg.ml
 *)
 
-let version = "0.1.1"
+let version = "0.2.0"
 
 let print_version () =
   let title = "Licenzio" in
