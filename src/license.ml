@@ -18,6 +18,7 @@ type license =
   | GNU_LGPL_3
   | MIT
   | MOZILLA
+  | ZLIB
 
 let all_licenses = [
   (APACHE_2,      [%blob "../licenses/apache_2.0.txt"]);
@@ -29,7 +30,8 @@ let all_licenses = [
   (GNU_GPL_2,     [%blob "../licenses/gnu_gpl-v3.txt"]);
   (GNU_LGPL_3,    [%blob "../licenses/gnu_lgpl-v3.txt"]);
   (MIT,           [%blob "../licenses/mit.txt"]);
-  (MOZILLA,       [%blob "../licenses/mozilla.txt"])
+  (MOZILLA,       [%blob "../licenses/mozilla.txt"]);
+  (ZLIB,          [%blob "../licenses/zlib.txt"])
 ]
 
 let license_of_string str : license option =
@@ -44,6 +46,7 @@ let license_of_string str : license option =
   | "lgpl" -> Some (GNU_LGPL_3)
   | "mit" -> Some (MIT)
   | "mozilla" -> Some (MOZILLA)
+  | "zlib" -> Some (ZLIB)
   | _ -> None
 
 let cmd_of_license l : string =
@@ -58,6 +61,7 @@ let cmd_of_license l : string =
   | GNU_LGPL_3 -> "lgpl"
   | MIT -> "mit"
   | MOZILLA -> "mozilla"
+  | ZLIB -> "zlib"
 
 let title_of_license = function
   | APACHE_2      -> "Apache License (Version 2.0)"
@@ -70,6 +74,7 @@ let title_of_license = function
   | GNU_LGPL_3    -> "GNU Lesser General Public License v3.0"
   | MIT           -> "MIT License"
   | MOZILLA       -> "Mozilla Public License 2.0"
+  | ZLIB          -> "zlib License"
 
 let create_license_file ?(out_dir="./") str =
   let out_filename = "LICENSE" in

@@ -13,5 +13,6 @@
    (file ../licenses/gnu_lgpl-v3.txt)
    (file ../licenses/mit.txt)
    (file ../licenses/mozilla.txt)
+   (file ../licenses/zlib.txt)
   )
 )
