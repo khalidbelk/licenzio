@@ -15,7 +15,7 @@ type license =
   | CC_BY_4
   | EUPL_1_2
   | GNU_AGPL_3
-  | GNU_GPL_2
+  | GNU_GPL_3
   | GNU_LGPL_3
   | MIT
   | MOZILLA
@@ -29,7 +29,7 @@ let all_licenses = [
   (CC_BY_4,       [%blob "../licenses/cc_attrib_4.txt"]);
   (EUPL_1_2,      [%blob "../licenses/eupl_1.2.txt"]);
   (GNU_AGPL_3,    [%blob "../licenses/gnu_agpl-v3.txt"]);
-  (GNU_GPL_2,     [%blob "../licenses/gnu_gpl-v3.txt"]);
+  (GNU_GPL_3,     [%blob "../licenses/gnu_gpl-v3.txt"]);
   (GNU_LGPL_3,    [%blob "../licenses/gnu_lgpl-v3.txt"]);
   (MIT,           [%blob "../licenses/mit.txt"]);
   (MOZILLA,       [%blob "../licenses/mozilla.txt"]);
@@ -45,7 +45,7 @@ let license_of_string str : license option =
   | "cc" -> Some (CC_BY_4)
   | "eupl" -> Some (EUPL_1_2)
   | "agpl" -> Some (GNU_AGPL_3)
-  | "gpl" -> Some (GNU_GPL_2)
+  | "gpl" -> Some (GNU_GPL_3)
   | "lgpl" -> Some (GNU_LGPL_3)
   | "mit" -> Some (MIT)
   | "mozilla" -> Some (MOZILLA)
@@ -61,7 +61,7 @@ let cmd_of_license l : string =
   | CC_BY_4 -> "cc"
   | EUPL_1_2 -> "eupl"
   | GNU_AGPL_3 -> "agpl"
-  | GNU_GPL_2 -> "gpl"
+  | GNU_GPL_3 -> "gpl"
   | GNU_LGPL_3 -> "lgpl"
   | MIT -> "mit"
   | MOZILLA -> "mozilla"
@@ -75,7 +75,7 @@ let title_of_license = function
   | CC_BY_4       -> "Creative Commons - Attribution 4.0 International"
   | EUPL_1_2      -> "European Union Public License 1.2"
   | GNU_AGPL_3    -> "GNU Affero General Public License v3.0"
-  | GNU_GPL_2     -> "GNU General Public License v2.0"
+  | GNU_GPL_3     -> "GNU General Public License v3.0"
   | GNU_LGPL_3    -> "GNU Lesser General Public License v3.0"
   | MIT           -> "MIT License"
   | MOZILLA       -> "Mozilla Public License 2.0"
