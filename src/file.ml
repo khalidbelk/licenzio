@@ -7,4 +7,4 @@
 let write_to_file content dest_filename =
   let out_channel = open_out dest_filename in
   output_string out_channel content;
-  close_out out_channel;
+  close_out out_channel

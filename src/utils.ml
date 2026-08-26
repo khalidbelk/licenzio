@@ -9,21 +9,19 @@ module L = License
 let formatted_flags_list =
   let format elem =
     let cmd = L.cmd_of_license elem in
-    let formatted_cmd =
-      if String.length cmd <= 7 then cmd ^ "\t"
-      else cmd
-    in
+    let formatted_cmd = if String.length cmd <= 7 then cmd ^ "\t" else cmd in
     "\t" ^ formatted_cmd ^ " : " ^ L.title_of_license elem ^ "\n"
   in
-    let license_names = List.map fst L.all_licenses in
-    let formatted = license_names |> List.map format
-    in formatted
+  let license_names = List.map fst L.all_licenses in
+  let formatted = license_names |> List.map format in
+  formatted
 
 let help =
-  "USAGE: ./licenzio <license_name> [OPTIONS]\n\n"
-  ^ "license_name :" ^ "\n\n"
-  ^ (String.concat "" formatted_flags_list) ^ "\n"
-  ^ "OPTIONS: " ^ "\n"
-  ^ "\t" ^ "-o             Output directory / path" ^ "\n\n"
-  ^ "\t" ^ "-h, --help     Show this help message" ^ "\n"
-  ^ "\t" ^ "-v, --version  Show version info" ^ "\n"
+  "USAGE: ./licenzio <license_name> [OPTIONS]\n\n" ^ "license_name :" ^ "\n\n"
+  ^ String.concat "" formatted_flags_list
+  ^ "\n"
+  ^ "OPTIONS:
+    \t-o             Output directory / path\n
+    \t-h, --help     Show this help message
+    \t-v, --version  Show version info"
+  ^ "\n"

@@ -16,6 +16,9 @@ opam:
 
 install: opam-deps
 
+format:
+	dune fmt
+
 opam-deps:
 	@echo "${GREEN}Installing dependencies...${RESET}"
 	opam install . --deps-only --with-test || true
