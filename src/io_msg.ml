@@ -9,9 +9,9 @@ let version = "0.2.0"
 let print_version () =
   let title = "Licenzio" in
   let description = "A CLI tool for adding license files to projects" in
-  let repo_url = "github.com/khalidbelk/licenzio"
+  let repo_url = "https://github.com/khalidbelk/licenzio"
   in
-    print_endline (title ^ " v" ^ version ^ "\n" ^ description ^ "\n" ^ repo_url)
+    print_endline (title ^ " v" ^ version ^ "\n\n" ^ description ^ "\n\n" ^ "Repository URL: " ^ repo_url)
 
 let print_use_help () =
   print_endline "Use '-h' or '--help' for usage information."
