@@ -4,7 +4,7 @@
   File: src/metadata.ml
 *)
 
-let version = "0.2.1"
+let version = "0.2.2"
 let title = "Licenzio"
 let description = "A CLI tool for adding license files to projects"
 let repo_url = "https://github.com/khalidbelk/licenzio"
