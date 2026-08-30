@@ -4,15 +4,14 @@
   File: src/io_msg.ml
 *)
 
-let version = "0.2.1"
+module M = Metadata
 
 let print_version () =
-  let title = "Licenzio" in
-  let description = "A CLI tool for adding license files to projects" in
-  let repo_url = "https://github.com/khalidbelk/licenzio" in
-  print_endline
-    (title ^ " v" ^ version ^ "\n\n" ^ description ^ "\n\n" ^ "Repository URL: "
-   ^ repo_url)
+  let msg =
+    Printf.sprintf "%s v%s\n\n%s\n\nRepository URL: %s" M.title M.version
+      M.description M.repo_url
+  in
+  print_endline msg
 
 let print_use_help () =
   print_endline "Use '-h' or '--help' for usage information."
