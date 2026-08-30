@@ -20,7 +20,17 @@ licenzio -h
 
 ## Installation
 
-### Pre-built binaries
+> [!NOTE]
+> Licenzio is available for Linux (**x86_64 only**) and macOS (Apple Silicon, **arm64 only**).
+> When installing via `brew`, the formula will auto-detect the platform.
+
+### Via Homebrew
+
+```bash
+brew install khalidbelk/taps/licenzio
+```
+
+### Pre-built binaries (Github Releases)
 
 To install Licenzio, download the latest release binaries:
 
