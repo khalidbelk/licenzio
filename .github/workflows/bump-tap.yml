@@ -1,0 +1,63 @@
+name: Bump Homebrew Tap
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to bump the tap to (e.g. v0.2.2)
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  bump-tap:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Determine tag
+      id: tag
+      run: echo "tag=${{ github.event.release.tag_name || inputs.tag }}" >> "$GITHUB_OUTPUT"
+
+    - name: Download release binaries
+      env:
+        TAG: ${{ steps.tag.outputs.tag }}
+      run: |
+        curl -fsSL -o licenzio-macos "https://github.com/khalidbelk/licenzio/releases/download/${TAG}/licenzio-macos"
+        curl -fsSL -o licenzio-linux "https://github.com/khalidbelk/licenzio/releases/download/${TAG}/licenzio-linux"
+
+    - name: Compute version and checksums
+      id: meta
+      env:
+        TAG: ${{ steps.tag.outputs.tag }}
+      run: |
+        echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
+        echo "macos_sha256=$(sha256sum licenzio-macos | cut -d ' ' -f1)" >> "$GITHUB_OUTPUT"
+        echo "linux_sha256=$(sha256sum licenzio-linux | cut -d ' ' -f1)" >> "$GITHUB_OUTPUT"
+
+    - name: Checkout homebrew-taps
+      uses: actions/checkout@v4
+      with:
+        repository: khalidbelk/homebrew-taps
+        token: ${{ secrets.RELEASES_PAT_TOKEN }}
+        path: homebrew-taps
+
+    - name: Bump formula version and checksums
+      run: |
+        .github/scripts/bump-tap-formula.rb \
+          "${{ steps.meta.outputs.version }}" \
+          "${{ steps.meta.outputs.macos_sha256 }}" \
+          "${{ steps.meta.outputs.linux_sha256 }}" \
+          homebrew-taps/Formula/licenzio.rb
+
+    - name: Commit and push formula update
+      working-directory: homebrew-taps
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add Formula/licenzio.rb
+        git diff --cached --quiet || git commit -m "chore: bump licenzio to ${{ steps.meta.outputs.version }}"
+        git push
